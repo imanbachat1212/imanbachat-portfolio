@@ -50,6 +50,93 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(element);
   });
 
+  // Project Showcase Carousel
+  const slides = document.querySelectorAll('.showcase-slide');
+  const bgText = document.querySelector('.showcase-bg-text');
+  const nextBtn = document.querySelector('.next-btn');
+  const prevBtn = document.querySelector('.prev-btn');
+  const dotsContainer = document.querySelector('.showcase-dots');
+  
+  if (slides.length > 0) {
+    let currentSlide = 0;
+    let autoPlayInterval;
+
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('showcase-dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        updateShowcase();
+        resetAutoPlay();
+      });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.showcase-dot');
+
+    const updateShowcase = () => {
+      // Update slides
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[currentSlide].classList.add('active');
+      
+      // Update bg text
+      const title = slides[currentSlide].getAttribute('data-title');
+      if (bgText) {
+        bgText.style.opacity = '0';
+        setTimeout(() => {
+          bgText.textContent = title;
+          bgText.style.opacity = '1';
+        }, 300);
+      }
+      
+      // Update dots
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[currentSlide].classList.add('active');
+    };
+
+    const nextSlide = () => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateShowcase();
+    };
+
+    const prevSlide = () => {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateShowcase();
+    };
+
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetAutoPlay();
+    });
+    
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetAutoPlay();
+    });
+
+    // Auto play
+    const startAutoPlay = () => {
+      autoPlayInterval = setInterval(nextSlide, 5000);
+    };
+
+    const resetAutoPlay = () => {
+      clearInterval(autoPlayInterval);
+      startAutoPlay();
+    };
+
+    startAutoPlay();
+
+    // Pause on hover
+    const showcase = document.querySelector('.project-showcase');
+    if (showcase) {
+      showcase.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+      showcase.addEventListener('mouseleave', startAutoPlay);
+    }
+  }
+
+
   // Handle Form Submit (Prevent default behavior for demo)
   const contactForm = document.getElementById('contactForm');
   if(contactForm) {
@@ -73,6 +160,32 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.style.backgroundColor = '';
         }, 3000);
       }, 1500);
+    });
+  }
+
+  // WhatsApp Widget Logic
+  const waPopup = document.getElementById('waPopup');
+  const waBtn = document.getElementById('waBtn');
+  const waClose = document.getElementById('waClose');
+
+  if (waPopup && waBtn && waClose) {
+    // Show automatically after 3 seconds
+    setTimeout(() => {
+      waPopup.classList.add('show');
+    }, 3000);
+
+    // Toggle on button click
+    waBtn.addEventListener('click', () => {
+      if (waPopup.classList.contains('show')) {
+        window.open('https://wa.me/96170256769', '_blank');
+      } else {
+        waPopup.classList.add('show');
+      }
+    });
+
+    // Close on X click
+    waClose.addEventListener('click', () => {
+      waPopup.classList.remove('show');
     });
   }
 });
