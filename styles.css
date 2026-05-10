@@ -19,6 +19,9 @@
 
 body {
   background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(22, 224, 189, 0.03) 1px, transparent 0);
+  background-size: 50px 50px;
   color: var(--text-main);
   font-family: var(--font-body);
   line-height: 1.6;
@@ -199,9 +202,9 @@ header {
 .badge .dot {
   width: 8px;
   height: 8px;
-  background-color: #4CAF50;
+  background-color: var(--primary);
   border-radius: 50%;
-  box-shadow: 0 0 10px #4CAF50;
+  box-shadow: 0 0 10px var(--primary-glow);
   animation: pulse 2s infinite;
 }
 
@@ -556,6 +559,30 @@ footer {
   border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.client-logo, .client-avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  padding: 5px;
+}
+
+.client-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
 }
 
 .testimonial-card:hover {
@@ -667,9 +694,11 @@ footer {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.pricing-package.light {
-  background: #FFFFFF;
-  color: #121212;
+.pricing-package.featured {
+  background: rgba(22, 224, 189, 0.05);
+  color: var(--text-main);
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 30px var(--primary-glow);
 }
 
 .pkg-header {
@@ -716,8 +745,8 @@ footer {
   color: var(--text-secondary);
 }
 
-.pricing-package.light .pkg-desc {
-  color: #555555;
+.pricing-package.featured .pkg-desc {
+  color: var(--text-secondary);
 }
 
 .pkg-features {
@@ -743,14 +772,8 @@ footer {
   margin-top: auto;
 }
 
-.pricing-package.light .btn-primary {
-  background: #121212;
-  color: #FFFFFF;
-  box-shadow: none;
-}
-
-.pricing-package.light .btn-primary:hover {
-  background: var(--primary);
+.pricing-package.featured .btn-primary:hover {
+  background: #10b981;
 }
 
 /* Headshot Container */
@@ -1031,19 +1054,46 @@ footer {
 }
 
 .skill-pill {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 0.8rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(22, 224, 189, 0.3);
+  padding: 0.6rem 1.2rem;
   border-radius: 50px;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  font-size: 0.9rem;
+  color: var(--primary);
   white-space: nowrap;
-  transition: color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .skill-pill:hover {
-  color: var(--text-main);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(22, 224, 189, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+.tech-badge {
+  display: inline-block;
+  background: rgba(22, 224, 189, 0.1);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.result-badge {
+  display: inline-block;
+  background: rgba(22, 224, 189, 0.1);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 /* WhatsApp Floating Widget */
