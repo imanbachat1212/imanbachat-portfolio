@@ -19,7 +19,7 @@
 
 body {
   background-color: var(--bg-dark);
-  background-image: 
+  background-image:
     radial-gradient(circle at 1px 1px, rgba(22, 224, 189, 0.03) 1px, transparent 0);
   background-size: 50px 50px;
   color: var(--text-main);
@@ -165,7 +165,7 @@ header {
   display: flex;
   align-items: center;
   position: relative;
-  padding-top: 5rem;
+  padding-top: 10rem;
 }
 
 .hero-bg {
@@ -195,6 +195,7 @@ header {
   padding: 0.4rem 1rem;
   border-radius: 50px;
   font-size: 0.9rem;
+  margin-top: 1rem;
   margin-bottom: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -570,12 +571,13 @@ footer {
   margin-bottom: 1.5rem;
 }
 
-.client-logo, .client-avatar {
+.client-logo,
+.client-avatar {
   width: 50px;
   height: 50px;
   object-fit: contain;
   border-radius: 8px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   padding: 5px;
 }
 
@@ -1075,6 +1077,7 @@ footer {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
