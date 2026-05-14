@@ -1366,11 +1366,31 @@ footer {
   }
 
   .showcase-slider {
-    height: 300px;
+    height: auto;
+  }
+
+  .showcase-slide {
+    position: relative;
+    height: auto;
+  }
+
+  .slide-inner {
+    height: auto;
+  }
+
+  .slide-inner video,
+  .slide-inner img {
+    height: 220px;
+    flex-shrink: 0;
+  }
+
+  .slide-inner .contain-media {
+    height: 220px;
+    flex-shrink: 0;
   }
 
   .slide-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .showcase-bg-text {
@@ -1382,7 +1402,8 @@ footer {
     align-items: flex-start;
     padding: 1rem;
     height: auto;
-    gap: 0.8rem;
+    min-height: unset;
+    gap: 0.6rem;
   }
 
   .slide-details {
@@ -1392,6 +1413,23 @@ footer {
   .slide-tags {
     justify-content: flex-start;
     width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .showcase-controls {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    transform: none;
+    margin-top: 1.5rem;
+    justify-content: center;
+  }
+
+  .project-showcase {
+    min-height: unset;
+    padding: 2rem 0 1.5rem;
+    flex-direction: column;
+    align-items: center;
   }
 
   .help-header {
