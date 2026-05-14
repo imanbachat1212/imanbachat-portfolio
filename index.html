@@ -554,14 +554,17 @@
     <div class="contact-container">
       <div class="contact-form">
         <form id="contactForm">
+          <input type="hidden" name="access_key" value="dd17e38c-8bcc-4310-948d-39e3c2589f7c">
+          <input type="hidden" name="subject" value="New Portfolio Contact">
+          <input type="hidden" name="from_name" value="Iman Portfolio">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Your Name" required>
+            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" placeholder="Your Email" required>
+            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
           </div>
           <div class="form-group">
-            <select class="form-control" required>
+            <select name="service" class="form-control" required>
               <option value="" disabled selected>Service Interest...</option>
               <option value="whatsapp">WhatsApp AI Automation</option>
               <option value="web">Website Development</option>
@@ -570,7 +573,7 @@
             </select>
           </div>
           <div class="form-group">
-            <textarea class="form-control" placeholder="Tell me about your project..." required></textarea>
+            <textarea name="message" class="form-control" placeholder="Tell me about your project..." required></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Send Message →</button>
         </form>

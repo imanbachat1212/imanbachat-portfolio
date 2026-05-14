@@ -139,53 +139,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle Form Submit (Prevent default behavior for demo)
   const contactForm = document.getElementById('contactForm');
-  if(contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = contactForm.querySelector('button');
       const originalText = btn.innerHTML;
       btn.innerHTML = 'Sending...';
+      btn.disabled = true;
       btn.style.opacity = '0.7';
-      
-      // Simulate API call
-      setTimeout(() => {
-        btn.innerHTML = 'Message Sent! ✓';
-        btn.style.backgroundColor = '#4CAF50';
+
+      const formData = new FormData(contactForm);
+      const serviceVal = formData.get('service');
+      formData.set('subject', `New Portfolio Contact — ${serviceVal}`);
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          btn.innerHTML = 'Message Sent! ✓';
+          btn.style.backgroundColor = '#4CAF50';
+          btn.style.color = 'white';
+          btn.style.opacity = '1';
+          contactForm.reset();
+        } else {
+          btn.innerHTML = 'Failed. Try Again.';
+          btn.style.backgroundColor = '#e53935';
+          btn.style.color = 'white';
+          btn.style.opacity = '1';
+        }
+      } catch {
+        btn.innerHTML = 'Failed. Try Again.';
+        btn.style.backgroundColor = '#e53935';
         btn.style.color = 'white';
         btn.style.opacity = '1';
-        contactForm.reset();
-        
-        setTimeout(() => {
-          btn.innerHTML = originalText;
-          btn.style.backgroundColor = '';
-        }, 3000);
-      }, 1500);
-    });
-  }
-
-  // WhatsApp Widget Logic
-  const waPopup = document.getElementById('waPopup');
-  const waBtn = document.getElementById('waBtn');
-  const waClose = document.getElementById('waClose');
-
-  if (waPopup && waBtn && waClose) {
-    // Show automatically after 3 seconds
-    setTimeout(() => {
-      waPopup.classList.add('show');
-    }, 3000);
-
-    // Toggle on button click
-    waBtn.addEventListener('click', () => {
-      if (waPopup.classList.contains('show')) {
-        window.open('https://wa.me/96170256769', '_blank');
-      } else {
-        waPopup.classList.add('show');
       }
-    });
 
-    // Close on X click
-    waClose.addEventListener('click', () => {
-      waPopup.classList.remove('show');
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+      }, 3000);
     });
   }
+
+  
+
 });
